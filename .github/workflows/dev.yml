@@ -24,6 +24,7 @@ jobs:
 
       - name: Super-Linter
         uses: super-linter/super-linter@v7.2.1
+        
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Ensure token is added here
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}  # Add your private key to GitHub secrets
+
