@@ -12,11 +12,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install dependencies
+      - name: Install dependencies (npm)
         run: npm install
 
-      - name: Run linter
-        run: npm run lint
+      - name: Run ESLint
+        run: npx eslint . --ext .js,.jsx,.ts,.tsx  # Use `npx` for running ESLint without installing globally
 
   deploy:
     needs: linter  # Deploy only if linter passes
