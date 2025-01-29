@@ -6,21 +6,10 @@ on:
       - dev
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3  # Use the latest checkout action
-      - name: Install modules
-        run: yarn install  # Make sure you're using yarn install instead of just yarn
-      - name: Run ESLint
-        run: npx eslint .  # ESLint will use the configuration file to find the file types
-
-  deploy:
-    needs: build  # Deploy only if the build passes
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Deploy
-        run: echo "Deploying to development environment..."
+      - name: Super-Linter
+      uses: super-linter/super-linter@v7.2.1
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}  
