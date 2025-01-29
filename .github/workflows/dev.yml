@@ -5,19 +5,18 @@ on:
     branches:
       - dev
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Install modules
-      run: yarn
-    - name: Run ESLint
-      run: eslint . --ext .js,.jsx,.ts,.tsx
+      - uses: actions/checkout@v3  # Use the latest checkout action
+      - name: Install modules
+        run: yarn install  # Make sure you're using yarn install instead of just yarn
+      - name: Run ESLint
+        run: npx eslint .  # ESLint will use the configuration file to find the file types
 
   deploy:
-    needs: linter  # Deploy only if linter passes
+    needs: build  # Deploy only if the build passes
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
