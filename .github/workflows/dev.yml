@@ -1,18 +1,43 @@
-name: Dev Workflow
+name: Deploy Node.js Backend
 
 on:
   push:
     branches:
-      - dev
+      - dev # Change to the branch you want to deploy from
 
 jobs:
-  lint:
+  build:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3  # Ensure you're using the latest checkout version
 
-      - name: Super-Linter
-        uses: super-linter/super-linter@v7.2.1
+    steps:
+      # Checkout the code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '21'  # Specify Node.js version you want to use
+
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          npm install
+
+      # Run tests (optional but recommended)
+      - name: Run tests
+        run: |
+          npm test  # Or your custom test command
+
+      # Build the project (if needed)
+      - name: Build the project
+        run: |
+          npm run build  # Replace with your build command if needed
+
+      # Deploy the project to your server (modify this step according to your hosting platform)
+      - name: Deploy to Server
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} user@your-server-ip 'cd /path/to/project && git pull origin main && npm install && pm2 restart app'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}  # Add your private key to GitHub secrets
