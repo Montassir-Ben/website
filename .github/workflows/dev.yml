@@ -21,9 +21,6 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
-
-      - name: Super-Linter
-        uses: super-linter/super-linter@v7.2.1
         
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}  # Add your private key to GitHub secrets
