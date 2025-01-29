@@ -9,7 +9,10 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3  # Ensure you're using the latest checkout version
+
       - name: Super-Linter
-      uses: super-linter/super-linter@v7.2.1
-      env:
-        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}  
+        uses: super-linter/super-linter@v7.2.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
