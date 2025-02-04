@@ -15,3 +15,9 @@ jobs:
 
       - name: Super-Linter
         uses: super-linter/super-linter@v7.2.1
+
+      - name: Run linter
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ./run-linter.sh
