@@ -20,9 +20,6 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Build Project (if needed)
-        run: npm run build
-
       - name: Restart Server with PM2
         run: |
           npm install -g pm2
