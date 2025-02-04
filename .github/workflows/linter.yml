@@ -1,0 +1,14 @@
+name: linter
+
+on:
+  push:
+    branches: dev
+
+job:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Super-Linter
+      uses: super-linter/super-linter@v7.2.1
