@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 name: Merge Dev to Production and Deploy
 
 on:
@@ -49,3 +50,35 @@ jobs:
             npm install --production
             pm2 restart all  # Redémarrer l'application si nécessaire
           EOF
+=======
+name: Prod
+
+on:
+  pull_request:
+    branches:
+      - prod
+    types: 
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '21'
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+          
+      # Optionally add any post-deployment tasks
+>>>>>>> 22d58602ba0c4d0bc41444f60c5ae8d176c4633b

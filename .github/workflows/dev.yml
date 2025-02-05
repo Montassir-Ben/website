@@ -1,26 +1,27 @@
-name: Dev Workflow
+name: Deploy Node.js Backend
 
 on:
   push:
     branches:
-      - dev
+      - dev 
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3  # Use the latest checkout action
-      - name: Install modules
-        run: yarn install  # Make sure you're using yarn install instead of just yarn
-      - name: Run ESLint
-        run: npx eslint .  # ESLint will use the configuration file to find the file types
 
-  deploy:
-    needs: build  # Deploy only if the build passes
-    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Deploy
-        run: echo "Deploying to development environment..."
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '21'  
+
+      - name: Install dependencies
+        run: |
+          npm install
+        
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}  # Add your private key to GitHub secrets
+
