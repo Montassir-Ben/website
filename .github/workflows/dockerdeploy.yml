@@ -3,7 +3,7 @@ name: Deploy to Docker
 on:
   push:
     branches:
-      - main  # Change selon ta branche principale
+      - dev  # Change selon ta branche principale
 
 jobs:
   build-and-deploy:
